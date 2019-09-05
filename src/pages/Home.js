@@ -44,6 +44,29 @@ class Explore extends Component {
             </View>
           </View>
           <ScrollView scrollEventThrottle={36}>
+            <View style={{marginTop: 40, paddingHorizontal: 20}}>
+              <Text style={{fontSize: 20, fontWeight: '700'}}>
+                The Newest BOOK
+              </Text>
+              <Text style={{fontWeight: '100', marginTop: 10}}>
+                Perjalanan Dilan mencari Kitab sunbokong
+              </Text>
+              <View style={{width: width - 40, height: 200, marginTop: 20}}>
+                <Image
+                  style={{
+                    flex: 1,
+                    height: null,
+                    width: null,
+                    resizeMode: 'cover',
+                    borderRadius: 10,
+                    borderWidth: 1,
+                    borderColor: '#dddddd',
+                  }}
+                  source={require('../assets/dilan.jpg')}
+                />
+              </View>
+            </View>
+
             <View style={{flex: 1, backgroundColor: 'white', paddingTop: 20}}>
               <Text
                 style={{
@@ -72,28 +95,6 @@ class Explore extends Component {
                   />
                 </ScrollView>
               </View>
-              <View style={{marginTop: 40, paddingHorizontal: 20}}>
-                <Text style={{fontSize: 20, fontWeight: '700'}}>
-                  The Newest BOOK
-                </Text>
-                <Text style={{fontWeight: '100', marginTop: 10}}>
-                  Perjalanan Dilan mencari Kitab sunbokong
-                </Text>
-                <View style={{width: width - 40, height: 200, marginTop: 20}}>
-                  <Image
-                    style={{
-                      flex: 1,
-                      height: null,
-                      width: null,
-                      resizeMode: 'cover',
-                      borderRadius: 10,
-                      borderWidth: 1,
-                      borderColor: '#dddddd',
-                    }}
-                    source={require('../assets/dilan.jpg')}
-                  />
-                </View>
-              </View>
             </View>
             <View style={{marginTop: 40}}>
               <Text
@@ -114,23 +115,23 @@ class Explore extends Component {
                 }}>
                 <CardBookAll
                   width={width}
-                  name="The Cozy Place"
-                  type="PRIVATE ROOM - 2 BEDS"
-                  price={82}
+                  name="Testing"
+                  type="Available"
+                  genre="Mecha"
                   rating={4}
                 />
                 <CardBookAll
                   width={width}
-                  name="The Cozy Place dsjdsk skdjskd ksdjsk dsdjsk"
-                  type="PRIVATE ROOM - 2 BEDS"
-                  price={82}
+                  name="Testing"
+                  type="Available"
+                  genre="Mecha"
                   rating={4}
                 />
                 <CardBookAll
                   width={width}
-                  name="The Cozy Place"
-                  type="PRIVATE ROOM - 2 BEDS"
-                  price={82}
+                  name="Testing"
+                  type="Available"
+                  genre="Mecha"
                   rating={4}
                 />
               </View>

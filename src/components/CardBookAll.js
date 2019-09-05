@@ -39,7 +39,7 @@ class CardBookAll extends Component {
           <Text style={{fontSize: 12, fontWeight: 'bold'}}>
             {this.props.name}
           </Text>
-          <Text style={{fontSize: 10, color: 'grey'}}>{this.props.price}</Text>
+          <Text style={{fontSize: 10, color: 'grey'}}>{this.props.genre}</Text>
           <StarRating
             disable={true}
             maxStars={5}
