@@ -13,6 +13,7 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Bookcard from '../components/Bookcard';
+import CardBookAll from '../components/CardBookAll';
 
 const {height, width} = Dimensions.get('window');
 
@@ -92,6 +93,46 @@ class Explore extends Component {
                     source={require('../assets/dilan.jpg')}
                   />
                 </View>
+              </View>
+            </View>
+            <View style={{marginTop: 40}}>
+              <Text
+                style={{
+                  fontSize: 20,
+                  fontWeight: '700',
+                  paddingHorizontal: 20,
+                }}>
+                All Books
+              </Text>
+              <View
+                style={{
+                  paddingHorizontal: 20,
+                  marginTop: 20,
+                  flexDirection: 'row',
+                  flexWrap: 'wrap',
+                  justifyContent: 'space-between',
+                }}>
+                <CardBookAll
+                  width={width}
+                  name="The Cozy Place"
+                  type="PRIVATE ROOM - 2 BEDS"
+                  price={82}
+                  rating={4}
+                />
+                <CardBookAll
+                  width={width}
+                  name="The Cozy Place dsjdsk skdjskd ksdjsk dsdjsk"
+                  type="PRIVATE ROOM - 2 BEDS"
+                  price={82}
+                  rating={4}
+                />
+                <CardBookAll
+                  width={width}
+                  name="The Cozy Place"
+                  type="PRIVATE ROOM - 2 BEDS"
+                  price={82}
+                  rating={4}
+                />
               </View>
             </View>
           </ScrollView>
