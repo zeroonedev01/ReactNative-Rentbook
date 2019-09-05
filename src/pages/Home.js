@@ -13,6 +13,8 @@ import {
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Bookcard from '../components/Bookcard';
+import Genrecard from '../components/GenreCard';
+
 import CardBookAll from '../components/CardBookAll';
 
 const {height, width} = Dimensions.get('window');
@@ -44,6 +46,22 @@ class Explore extends Component {
             </View>
           </View>
           <ScrollView scrollEventThrottle={36}>
+            <View style={{height: 130, marginTop: 20}}>
+              <ScrollView
+                horizontal={true}
+                showsHorizontalScrollIndicator={false}>
+                <Genrecard
+                  imageUri={require('../assets/action.png')}
+                  name="Action"
+                  color="#28BFDB"
+                />
+                <Genrecard
+                  imageUri={require('../assets/action.png')}
+                  name="Echi"
+                  color="#f78fb3"
+                />
+              </ScrollView>
+            </View>
             <View style={{marginTop: 40, paddingHorizontal: 20}}>
               <Text style={{fontSize: 20, fontWeight: '700'}}>
                 The Newest BOOK
