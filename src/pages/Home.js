@@ -10,6 +10,7 @@ import {
   ScrollView,
   Image,
   Dimensions,
+  TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import Bookcard from '../components/Bookcard';
@@ -99,10 +100,13 @@ class Explore extends Component {
                 <ScrollView
                   horizontal={true}
                   showsHorizontalScrollIndicator={false}>
-                  <Bookcard
-                    imageUri={require('../assets/dilan.jpg')}
-                    name="Home"
-                  />
+                  <TouchableOpacity
+                    onPress={() => this.props.navigation.navigate('Detail')}>
+                    <Bookcard
+                      imageUri={require('../assets/dilan.jpg')}
+                      name="Home"
+                    />
+                  </TouchableOpacity>
                   <Bookcard
                     imageUri={require('../assets/dilan.jpg')}
                     name="Experiences"
