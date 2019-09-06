@@ -54,7 +54,7 @@ const HomeBottom = createBottomTabNavigator(
       },
     },
     History: {
-      screen: History,
+      screen: Login,
       navigationOptions: {
         tabBarLabel: 'HISTORY',
         tabBarIcon: ({tintColor}) => (
