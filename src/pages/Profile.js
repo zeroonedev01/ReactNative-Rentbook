@@ -12,15 +12,40 @@ import {
   ScrollView,
 } from 'react-native';
 import AsyncStorage from '@react-native-community/async-storage';
-import {logout} from '../Publics/actions/auth';
 import {connect} from 'react-redux';
-
+import {logout} from '../Publics/actions/auth';
+import jwt from 'react-native-pure-jwt';
 class UserProfileView extends Component {
   constructor(props) {
     super(props);
+    this.navigationWillFocusListener = props.navigation.addListener(
+      'willFocus',
+      async () => {
+        let toe = await AsyncStorage.getItem('token', (err, res) => {
+          console.log(err, res);
+        });
+
+        this.setState({isLogin: toe});
+        console.log(this.state.isLogin);
+        if (this.state.isLogin === null) {
+          this.props.navigation.navigate('Login');
+        }
+        const objJwt = await jwt.decode(
+          toe, // the token
+          '23r3f-W3155m4n', // the secret
+          {
+            skipValidation: true, // to skip signature and exp verification
+          },
+        );
+        this.setState({user: objJwt.payload});
+        console.log('User JWT', this.state.user);
+      },
+    );
     this.state = {
       modalVisible: false,
       userSelected: [],
+      isLogin: null,
+      user: [],
       data: [
         {
           id: 1,
@@ -59,17 +84,25 @@ class UserProfileView extends Component {
     );
   };
   afterLogOut = async () => {
-    await this.props
-      .dispatch(logout())
-      .then(async res => {
-        console.log('LogoUt');
-        await AsyncStorage.removeItem('token', err => console.log(err));
-        this.props.navigation.navigate('Login');
-      })
-      .catch(err => {
-        console.error(err);
-      });
+    console.log('LogoUt');
+    this.setState({isLogin: null, user: []});
+    await this.props.dispatch(logout());
+    await AsyncStorage.removeItem('token', err => console.log(err));
+    this.props.navigation.navigate('Login');
   };
+  componentWillUnmount() {
+    this.navigationWillFocusListener.remove();
+  }
+  async componentDidMount() {
+    // let toe = await AsyncStorage.getItem('token', (err, res) => {
+    //   console.log(err, res);
+    // });
+    // this.setState({isLogin: toe});
+    // console.log(this.state.isLogin);
+    // if (this.state.isLogin === null) {
+    //   this.props.navigation.navigate('Login');
+    // }
+  }
   clickEventListener = item => {
     Alert.alert('Message', 'Item clicked. ' + item.name);
   };
@@ -92,8 +125,8 @@ class UserProfileView extends Component {
                 }}
               />
 
-              <Text style={styles.name}>John Doe </Text>
-              <Text style={styles.userInfo}>jhonnydoe@mail.com </Text>
+              <Text style={styles.name}>{this.state.user.username}</Text>
+              <Text style={styles.userInfo}>{this.state.user.email}</Text>
               <TouchableOpacity
                 style={styles.followButton}
                 onPress={this.handleLogOut}>

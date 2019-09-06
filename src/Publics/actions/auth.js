@@ -31,6 +31,6 @@ export const register = data => {
 };
 export const logout = () => {
   return {
-    type: 'LOGOUT',
+    type: 'USER_LOGOUT',
   };
 };

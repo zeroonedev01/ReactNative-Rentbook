@@ -39,6 +39,7 @@ class Login extends Component {
           this.setState({username: '', password: ''});
           Alert.alert('Login Failed', `${res.action.payload.data.message}`);
         } else {
+          console.log('yuserData', this.props.auth.userData);
           const token = this.props.auth.userData.accessToken;
           await AsyncStorage.setItem('token', token, err => console.log(err));
           // console.log(token);

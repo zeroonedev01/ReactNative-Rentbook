@@ -20,8 +20,9 @@ import {connect} from 'react-redux';
 import {getBook, searchBook} from '../Publics/actions/book';
 import {getGenre} from '../Publics/actions/genre';
 import CardBookAll from '../components/CardBookAll';
-
 const {height, width} = Dimensions.get('window');
+import jwt from 'react-native-pure-jwt';
+import AsyncStorage from '@react-native-community/async-storage';
 
 class Explore extends Component {
   constructor(props) {
@@ -29,6 +30,7 @@ class Explore extends Component {
     this.handlePage = this.handlePage.bind(this);
     this.state = {
       books: [],
+      user: null,
       searchField: '',
       sort: '',
       carousel: [],
@@ -90,6 +92,18 @@ class Explore extends Component {
     await this.props.dispatch(getGenre());
     this.setState({getGen: this.props.genre.genre});
     console.log('getGen =', this.state.getGen);
+    let toe = await AsyncStorage.getItem('token', (err, res) => {
+      console.log(err, res);
+    });
+    const objJwt = await jwt.decode(
+      toe, // the token
+      '23r3f-W3155m4n', // the secret
+      {
+        skipValidation: true, // to skip signature and exp verification
+      },
+    );
+    this.setState({user: objJwt.payload});
+    console.log('User JWT', this.state.user);
   };
   searchBook = async e => {
     if (e.key === 'Enter') {
@@ -131,7 +145,7 @@ class Explore extends Component {
     return cleanData;
   };
   render() {
-    console.log('USer', this.props.auth);
+    console.log('User', this.props.auth.userData);
     console.log('State', this.state.books);
     let filterCarousel = this.state.carousel.filter(
       function(item) {
@@ -193,8 +207,8 @@ class Explore extends Component {
       ];
     };
 
-    console.log(randImage);
-    console.log(randColor);
+    // console.log(randImage);
+    // console.log(randColor);
 
     // console.log(
     //   'Random',

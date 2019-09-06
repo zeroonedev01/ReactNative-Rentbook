@@ -7,10 +7,10 @@ const init = {
 
 const auth = (state = init, action) => {
   switch (action.type) {
-    case 'LOGOUT':
-      return {
-        userData: [],
-      };
+    // case 'LOGOUT':
+    //   return {
+    //     userData: [],
+    //   };
     case 'LOGIN_PENDING':
       return {
         ...state,
