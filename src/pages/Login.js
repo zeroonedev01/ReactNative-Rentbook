@@ -75,7 +75,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 284,
     left: 36,
-    top: 225,
+    top: 200,
   },
   signInButton: {
     position: 'absolute',

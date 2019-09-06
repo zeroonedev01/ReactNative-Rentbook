@@ -22,15 +22,15 @@ const HomeStack = createStackNavigator(
     },
     Login: {
       screen: Login,
-      navigationOptions: ({navigation}) => ({}),
+      navigationOptions: ({navigation}) => ({header: null}),
     },
     Register: {
       screen: Register,
-      navigationOptions: ({navigation}) => ({}),
+      navigationOptions: ({navigation}) => ({header: null}),
     },
     Detail: {
       screen: Detail,
-      navigationOptions: ({navigation}) => ({}),
+      navigationOptions: ({navigation}) => ({header: null}),
     },
   },
   {
@@ -54,7 +54,7 @@ const HomeBottom = createBottomTabNavigator(
       },
     },
     History: {
-      screen: Login,
+      screen: Register,
       navigationOptions: {
         tabBarLabel: 'HISTORY',
         tabBarIcon: ({tintColor}) => (

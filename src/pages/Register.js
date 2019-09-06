@@ -23,7 +23,7 @@ class Register extends Component {
   render() {
     return (
       <Container>
-        <Text style={styles.header}>Create an Account, Join Us Today !</Text>
+        <Text style={styles.header}>Let's Get Started</Text>
         <Content style={styles.form}>
           <Form>
             <Item floatingLabel>
@@ -40,21 +40,31 @@ class Register extends Component {
             </Item>
           </Form>
         </Content>
+        <Text style={styles.title}>REGISTER</Text>
         <Button rounded dark style={styles.signUpButton}>
-          <Icon type="FontAwesome" name="arrow-right" />
+          <Icon type="MaterialIcons" name="arrow-forward" />
         </Button>
         <Text
           style={styles.login}
           onPress={() => this.props.navigation.navigate('Login')}>
           Login
         </Text>
-        <Text style={styles.remark}>Book is window to the world</Text>
       </Container>
     );
   }
 }
 
 const styles = StyleSheet.create({
+  title: {
+    position: 'absolute',
+    width: 126,
+    height: 43,
+    left: 36,
+    top: 420,
+    fontSize: 23,
+    fontWeight: '700',
+    color: '#4B4C72',
+  },
   screen: {
     position: 'relative',
   },
@@ -74,7 +84,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     width: 284,
     left: 36,
-    top: 200,
+    top: 150,
   },
   signUpButton: {
     position: 'absolute',
