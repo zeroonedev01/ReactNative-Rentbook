@@ -41,7 +41,11 @@ class Register extends Component {
           </Form>
         </Content>
         <Text style={styles.title}>REGISTER</Text>
-        <Button rounded dark style={styles.signUpButton}>
+        <Button
+          rounded
+          dark
+          style={styles.signUpButton}
+          onPress={() => this.props.navigation.navigate('Login')}>
           <Icon type="MaterialIcons" name="arrow-forward" />
         </Button>
         <Text

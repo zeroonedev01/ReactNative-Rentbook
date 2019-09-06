@@ -11,8 +11,11 @@ import {
   Alert,
   ScrollView,
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
+import {logout} from '../Publics/actions/auth';
+import {connect} from 'react-redux';
 
-export default class UserProfileView extends Component {
+class UserProfileView extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -40,6 +43,33 @@ export default class UserProfileView extends Component {
       ],
     };
   }
+  handleLogOut = () => {
+    Alert.alert(
+      'Confirm',
+      'Are you sure want to Log out?',
+      [
+        {
+          text: 'Cancel',
+          onPress: () => console.log('Cancel Pressed'),
+          style: 'cancel',
+        },
+        {text: 'OK', onPress: () => this.afterLogOut()},
+      ],
+      {cancelable: false},
+    );
+  };
+  afterLogOut = async () => {
+    await this.props
+      .dispatch(logout())
+      .then(async res => {
+        console.log('LogoUt');
+        await AsyncStorage.removeItem('token', err => console.log(err));
+        this.props.navigation.navigate('Login');
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
   clickEventListener = item => {
     Alert.alert('Message', 'Item clicked. ' + item.name);
   };
@@ -58,13 +88,15 @@ export default class UserProfileView extends Component {
               <Image
                 style={styles.avatar}
                 source={{
-                  uri: 'https://bootdey.com/img/Content/avatar/avatar6.png',
+                  uri: 'https://i.pravatar.cc/300',
                 }}
               />
 
               <Text style={styles.name}>John Doe </Text>
               <Text style={styles.userInfo}>jhonnydoe@mail.com </Text>
-              <TouchableOpacity style={styles.followButton}>
+              <TouchableOpacity
+                style={styles.followButton}
+                onPress={this.handleLogOut}>
                 <Text style={styles.followButtonText}>Log Out</Text>
               </TouchableOpacity>
             </View>
@@ -230,3 +262,10 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 });
+const mapStateToProps = state => {
+  return {
+    auth: state.auth,
+  };
+};
+
+export default connect(mapStateToProps)(UserProfileView);

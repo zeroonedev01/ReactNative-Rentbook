@@ -21,6 +21,11 @@ import {
 class Detail extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      curentUser: null,
+      books: [],
+      data: [],
+    };
   }
   render() {
     return (
@@ -74,9 +79,17 @@ class Detail extends Component {
                 ad itaque aspernatur quisquam. Ipsam, vitae ad. Beatae similique
               </Text>
               <View>
-                <Button style={styles.actionButton}>
-                  <Text style={styles.actionButtonText}> Borrow </Text>
-                </Button>
+                {this.state.curentUser !== null ? (
+                  <Button style={styles.actionButton}>
+                    <Text style={styles.actionButtonText}> Borrow </Text>
+                  </Button>
+                ) : (
+                  <Button
+                    style={styles.actionButton1}
+                    onPress={() => this.props.navigation.navigate('Login')}>
+                    <Text style={styles.actionButtonText}> Sign In</Text>
+                  </Button>
+                )}
               </View>
             </View>
           </View>
@@ -143,6 +156,19 @@ const styles = StyleSheet.create({
     width: 164,
     height: 39,
     backgroundColor: '#F4CF5D',
+    borderRadius: 20,
+    shadowColor: '#000',
+    shadowOffset: {width: 0, height: 4},
+    shadowOpacity: 0.25,
+    shadowRadius: 20,
+    marginVertical: 20,
+    marginLeft: 'auto',
+    marginRight: 'auto',
+  },
+  actionButton1: {
+    width: 164,
+    height: 39,
+    backgroundColor: '#303952',
     borderRadius: 20,
     shadowColor: '#000',
     shadowOffset: {width: 0, height: 4},

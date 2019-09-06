@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 import StarRating from 'react-native-star-rating';
@@ -16,21 +17,23 @@ class CardBookAll extends Component {
         <View style={{flex: 1}}>
           <Image
             style={{
-              flex: 1.5,
+              flex: 1.6,
               width: null,
               height: null,
-              resizeMode: 'cover',
+              resizeMode: 'stretch',
               borderTopLeftRadius: 10,
               borderTopRightRadius: 10,
             }}
-            source={require('../assets/dilan.jpg')}
+            source={{
+              uri: `${this.props.image}`,
+            }}
           />
         </View>
         <View
           style={{
-            flex: 0.5,
+            flex: 0.4,
             alignItems: 'flex-start',
-            justifyContent: 'space-evenly',
+            // justifyContent: 'space-evenly',
             paddingLeft: 10,
           }}>
           <Text style={{fontSize: 10, color: '#00b894'}}>

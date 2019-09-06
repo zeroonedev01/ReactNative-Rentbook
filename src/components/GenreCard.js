@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 
@@ -28,7 +29,9 @@ class Genrecard extends Component {
           </Text>
         </View>
         <Image
-          source={this.props.imageUri}
+          source={{
+            uri: `${this.props.imageUri}`,
+          }}
           style={{
             flex: 1.3,
             width: 150,

@@ -1,3 +1,4 @@
+/* eslint-disable react-native/no-inline-styles */
 import React, {Component} from 'react';
 import {View, Text, StyleSheet, Image} from 'react-native';
 
@@ -5,9 +6,10 @@ class Bookcard extends Component {
   render() {
     return (
       <View
+        // eslint-disable-next-line react-native/no-inline-styles
         style={{
           height: 130,
-          width: 130,
+          width: 200,
           marginLeft: 20,
           borderRadius: 10,
           borderWidth: 0.5,
@@ -15,7 +17,9 @@ class Bookcard extends Component {
         }}>
         <View style={{flex: 2}}>
           <Image
-            source={this.props.imageUri}
+            source={{
+              uri: `${this.props.imageUri}`,
+            }}
             style={{
               flex: 1,
               width: null,
@@ -26,7 +30,12 @@ class Bookcard extends Component {
             }}
           />
         </View>
-        <View style={{flex: 1, paddingLeft: 10, paddingTop: 10}}>
+        <View
+          style={{
+            flex: 0.8,
+            paddingLeft: 10,
+            paddingTop: 10,
+          }}>
           <Text>{this.props.name}</Text>
         </View>
       </View>

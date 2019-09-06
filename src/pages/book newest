@@ -1,0 +1,26 @@
+  <Text style={{fontSize: 20, fontWeight: '700'}}>
+                The Newest BOOK
+              </Text>
+              {filterNewest.map((book, i) => (
+                <>
+                  <Text style={{fontWeight: '700', marginTop: 10}}>
+                    {book.Title}
+                  </Text>
+                  <View style={{width: width - 40, height: 200, marginTop: 20}}>
+                    <Image
+                      style={{
+                        flex: 1,
+                        height: null,
+                        width: null,
+                        resizeMode: 'cover',
+                        borderRadius: 10,
+                        borderWidth: 1,
+                        borderColor: '#dddddd',
+                      }}
+                      source={{
+                        uri: `${book.Image}`,
+                      }}
+                    />
+                  </View>
+                </>
+              ))}

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet} from 'react-native';
+import {Text, StyleSheet, Alert} from 'react-native';
 import {
   Container,
   Content,
@@ -9,7 +9,12 @@ import {
   Label,
   Button,
   Icon,
+  Spinner,
 } from 'native-base';
+import {login} from '../Publics/actions/auth';
+import {connect} from 'react-redux';
+import AsyncStorage from '@react-native-community/async-storage';
+// import {setToken, getToken} from '../helpers/token';
 
 class Login extends Component {
   constructor(props) {
@@ -19,7 +24,42 @@ class Login extends Component {
       password: '',
     };
   }
+  handleLogin = async () => {
+    const body = {
+      email: this.state.username,
+      password: this.state.password,
+    };
+    await this.props
+      .dispatch(login(body))
+      .then(async res => {
+        if (res.action.payload.data.status === 403) {
+          this.setState({username: '', password: ''});
+          Alert.alert('Login Failed', `${res.action.payload.data.message}`);
+        } else if (res.action.payload.data.status === 404) {
+          this.setState({username: '', password: ''});
+          Alert.alert('Login Failed', `${res.action.payload.data.message}`);
+        } else {
+          const token = this.props.auth.userData.accessToken;
+          await AsyncStorage.setItem('token', token, err => console.log(err));
+          // console.log(token);
+          // Alert.alert('Login Success', 'Success');
+          this.props.navigation.navigate('Home');
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
+  async componentDidMount() {
+    let toe = await AsyncStorage.getItem('token', (err, res) => {
+      console.log(err, res);
+    });
+    if (toe !== null) {
+      this.props.navigation.navigate('Home');
+    }
+  }
   render() {
+    const {isLoading} = this.props.auth;
     return (
       <Container>
         <Text style={styles.header}>Here To Get Welcomed !</Text>
@@ -27,17 +67,41 @@ class Login extends Component {
           <Form>
             <Item floatingLabel>
               <Label>Username</Label>
-              <Input />
+              <Input
+                autoFocus={true}
+                onChangeText={text =>
+                  this.setState({
+                    username: text,
+                  })
+                }
+                value={this.state.username}
+              />
             </Item>
             <Item floatingLabel last>
               <Label>Password</Label>
-              <Input />
+              <Input
+                secureTextEntry={true}
+                onChangeText={text =>
+                  this.setState({
+                    password: text,
+                  })
+                }
+                value={this.state.password}
+              />
             </Item>
           </Form>
         </Content>
         <Text style={styles.title}>SIGN IN</Text>
-        <Button rounded dark style={styles.signInButton}>
-          <Icon type="MaterialIcons" name="arrow-forward" />
+        <Button
+          rounded
+          dark
+          style={styles.signInButton}
+          onPress={this.handleLogin}>
+          {isLoading ? (
+            <Spinner style={{marginLeft: 3}} color="white" />
+          ) : (
+            <Icon type="MaterialIcons" name="arrow-forward" />
+          )}
         </Button>
         <Text
           style={styles.signup}
@@ -108,4 +172,10 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Login;
+const mapStateToProps = state => {
+  return {
+    auth: state.auth,
+  };
+};
+
+export default connect(mapStateToProps)(Login);

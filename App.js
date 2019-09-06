@@ -13,7 +13,7 @@ import {Container, Header, Content, Icon} from 'native-base';
 import {StyleSheet, Text, View, Image} from 'react-native';
 import AddDonation from './src/pages/AddDonation';
 
-// import store from './src/Publics/store';
+import store from './src/Publics/store';
 const HomeStack = createStackNavigator(
   {
     Home: {
@@ -54,7 +54,7 @@ const HomeBottom = createBottomTabNavigator(
       },
     },
     History: {
-      screen: Register,
+      screen: History,
       navigationOptions: {
         tabBarLabel: 'HISTORY',
         tabBarIcon: ({tintColor}) => (
@@ -135,9 +135,9 @@ const styles = StyleSheet.create({
 export default class App extends Component {
   render() {
     return (
-      // <Provider store={store}>
-      <AppRoot />
-      // </Provider>
+      <Provider store={store}>
+        <AppRoot />
+      </Provider>
     );
   }
 }
