@@ -301,7 +301,11 @@ class Explore extends Component {
                   showsHorizontalScrollIndicator={false}>
                   {filterCarousel.map((book, i) => (
                     <TouchableOpacity
-                      onPress={() => this.props.navigation.navigate('Detail')}>
+                      onPress={() =>
+                        this.props.navigation.navigate('Detail', {
+                          bookid: book.id,
+                        })
+                      }>
                       <Bookcard imageUri={book.Image} name={book.Title} />
                     </TouchableOpacity>
                   ))}
@@ -327,9 +331,14 @@ class Explore extends Component {
                 }}>
                 {this.state.books.map((book, i) => (
                   <TouchableOpacity
-                    onPress={() => this.props.navigation.navigate('Detail')}>
+                    onPress={() =>
+                      this.props.navigation.navigate('Detail', {
+                        bookid: book.id,
+                      })
+                    }>
                     <CardBookAll
                       width={width}
+                      data={book}
                       name={book.Title}
                       type={book.status}
                       genre={book.genre}

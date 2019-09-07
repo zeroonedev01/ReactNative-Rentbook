@@ -86,7 +86,7 @@ class UserProfileView extends Component {
   afterLogOut = async () => {
     console.log('LogoUt');
     this.setState({isLogin: null, user: []});
-    await this.props.dispatch(logout());
+    // await this.props.dispatch(logout());
     await AsyncStorage.removeItem('token', err => console.log(err));
     this.props.navigation.navigate('Login');
   };

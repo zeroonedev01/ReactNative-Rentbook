@@ -1,11 +1,13 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
+import {Spinner} from 'native-base';
 
 class AddDonation extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <Text>AddDonation</Text>
+        <Text>Loading Form</Text>
+        <Spinner color="red" />
       </View>
     );
   }

@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Text, StyleSheet} from 'react-native';
+import {Text, StyleSheet, Alert} from 'react-native';
 import {
   Container,
   Content,
@@ -9,18 +9,43 @@ import {
   Label,
   Button,
   Icon,
+  Spinner,
 } from 'native-base';
-
+import {register} from '../Publics/actions/auth';
+import {connect} from 'react-redux';
 class Register extends Component {
   constructor(props) {
     super(props);
     this.state = {
       username: '',
-      email: '',
       password: '',
+      email: '',
     };
   }
+
+  onFormSubmit = async () => {
+    const body = {
+      username: this.state.username,
+      email: this.state.email,
+      password: this.state.password,
+      role_id: 2,
+    };
+    await this.props
+      .dispatch(register(body))
+      .then(res => {
+        if (res.action.payload.data.status === 409) {
+          Alert.alert('Register Failed', `${res.action.payload.data.message}`);
+        } else {
+          this.props.navigation.navigate('Login');
+        }
+      })
+      .catch(err => {
+        console.error(err);
+      });
+  };
   render() {
+    const {isLoading} = this.props.auth;
+
     return (
       <Container>
         <Text style={styles.header}>Let's Get Started</Text>
@@ -28,15 +53,37 @@ class Register extends Component {
           <Form>
             <Item floatingLabel>
               <Label>Username</Label>
-              <Input />
+              <Input
+                value={this.state.username}
+                onChangeText={text =>
+                  this.setState({
+                    username: text,
+                  })
+                }
+              />
             </Item>
             <Item floatingLabel>
               <Label>Email</Label>
-              <Input />
+              <Input
+                value={this.state.email}
+                onChangeText={text =>
+                  this.setState({
+                    email: text,
+                  })
+                }
+              />
             </Item>
             <Item floatingLabel last>
               <Label>Password</Label>
-              <Input />
+              <Input
+                secureTextEntry={true}
+                value={this.state.password}
+                onChangeText={text =>
+                  this.setState({
+                    password: text,
+                  })
+                }
+              />
             </Item>
           </Form>
         </Content>
@@ -45,8 +92,12 @@ class Register extends Component {
           rounded
           dark
           style={styles.signUpButton}
-          onPress={() => this.props.navigation.navigate('Login')}>
-          <Icon type="MaterialIcons" name="arrow-forward" />
+          onPress={this.onFormSubmit}>
+          {isLoading ? (
+            <Spinner style={{marginLeft: 3}} color="white" />
+          ) : (
+            <Icon type="MaterialIcons" name="arrow-forward" />
+          )}
         </Button>
         <Text
           style={styles.login}
@@ -123,5 +174,10 @@ const styles = StyleSheet.create({
     color: '#4B4C72',
   },
 });
+const mapStateToProps = state => {
+  return {
+    auth: state.auth,
+  };
+};
 
-export default Register;
+export default connect(mapStateToProps)(Register);
