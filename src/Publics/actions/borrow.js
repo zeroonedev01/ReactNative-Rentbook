@@ -5,7 +5,7 @@ export const getBorrowId = (id, token) => {
     type: 'GET_BORROW_IDBOOK',
     payload: axios({
       method: 'get',
-      url: `http://192.168.100.81:3020/rentapp/borrows?userid=${id}`,
+      url: `http://192.168.100.69:3020/rentapp/borrows?userid=${id}`,
       headers: {
         'x-access-token': `${token}`,
       },
@@ -21,7 +21,7 @@ export const getBorrowStatus = (status, id, token) => {
     type: 'GET_BORROW_STATUS',
     payload: axios({
       method: 'get',
-      url: `http://192.168.100.81:3020/rentapp/borrows?bookid='${id}'&status=${status}`,
+      url: `http://192.168.100.69:3020/rentapp/borrows?bookid='${id}'&status=${status}`,
       headers: {
         'x-access-token': `${token}`,
       },
@@ -37,7 +37,7 @@ export const borrowBook = (data, token) => {
     type: 'BORROW_BOOK',
     payload: axios({
       method: 'post',
-      url: `http://192.168.100.81:3020/rentapp/borrows`,
+      url: `http://192.168.100.69:3020/rentapp/borrows`,
       data: data,
       headers: {
         'x-access-token': `${token}`,
@@ -50,7 +50,7 @@ export const returnBook = (id, token) => {
     type: 'RETURN_BOOK',
     payload: axios({
       method: 'patch',
-      url: `http://192.168.100.81:3020/rentapp/borrows/${id}`,
+      url: `http://192.168.100.69:3020/rentapp/borrows/${id}`,
       headers: {
         'x-access-token': `${token}`,
       },
@@ -62,7 +62,7 @@ export const searchTrx = (id, token) => {
     type: 'GET_BORROW_REQUEST',
     payload: axios({
       method: 'get',
-      url: `http://192.168.100.81:3020/rentapp/borrows/borrowall/${id}`,
+      url: `http://192.168.100.69:3020/rentapp/borrows/borrowall/${id}`,
       headers: {
         'x-access-token': `${token}`,
       },
@@ -78,7 +78,7 @@ export const confirmBorID = (id, token) => {
     type: 'CONFIRM_BORROW_REQUEST',
     payload: axios({
       method: 'patch',
-      url: `http://192.168.100.81:3020/rentapp/borrows/borrowid/${id}`,
+      url: `http://192.168.100.69:3020/rentapp/borrows/borrowid/${id}`,
       headers: {
         'x-access-token': `${token}`,
       },

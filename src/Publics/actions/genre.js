@@ -5,7 +5,7 @@ export const getGenre = () => {
     type: 'GET_GENRE',
     payload: axios
       .get(
-        `http://192.168.100.81:3020/rentapp/genres?page=1&limit=100&sort=name:asc`,
+        `http://192.168.100.69:3020/rentapp/genres?page=1&limit=100&sort=name:asc`,
       )
       .then()
       .catch(err => {

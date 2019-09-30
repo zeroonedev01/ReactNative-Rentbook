@@ -4,14 +4,14 @@ export const getBook = () => {
   return {
     type: 'GET_BOOK',
     payload: axios.get(
-      `http://192.168.100.81:3020/rentapp/books?sort=datereleased:desc`,
+      `http://192.168.100.69:3020/rentapp/books?sort=datereleased:desc`,
     ),
   };
 };
 export const searchBook = e => {
   return {
     type: 'SEARCH_BOOK',
-    payload: axios.get(`http://192.168.100.81:3020/rentapp/books`, {
+    payload: axios.get(`http://192.168.100.69:3020/rentapp/books`, {
       params: {
         search: e,
       },
@@ -21,7 +21,7 @@ export const searchBook = e => {
 export const getBookById = id => {
   return {
     type: 'GET_BOOK_ID',
-    payload: axios.get(`http://192.168.100.81:3020/rentapp/books/${id}`),
+    payload: axios.get(`http://192.168.100.69:3020/rentapp/books/${id}`),
   };
 };
 export const addBook = (data, token) => {
@@ -29,7 +29,7 @@ export const addBook = (data, token) => {
     type: 'ADD_BOOK',
     payload: axios({
       method: 'post',
-      url: `http://192.168.100.81:3020/rentapp/books`,
+      url: `http://192.168.100.69:3020/rentapp/books`,
       data: data,
       headers: {
         'x-access-token': `${token}`,
@@ -46,7 +46,7 @@ export const editBook = (id, data, token) => {
     type: 'EDIT_BOOK',
     payload: axios({
       method: 'patch',
-      url: `http://192.168.100.81:3020/rentapp/books/${id}`,
+      url: `http://192.168.100.69:3020/rentapp/books/${id}`,
       data: data,
       headers: {
         'x-access-token': `${token}`,
@@ -63,7 +63,7 @@ export const deleteBook = (id, token) => {
     type: 'DELETE_BOOK',
     payload: axios({
       method: 'delete',
-      url: `http://192.168.100.81:3020/rentapp/books/${id}`,
+      url: `http://192.168.100.69:3020/rentapp/books/${id}`,
       headers: {
         'x-access-token': `${token}`,
       },

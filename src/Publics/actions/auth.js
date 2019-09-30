@@ -1,11 +1,17 @@
 import axios from 'axios';
+export const getUserById = id => {
+  return {
+    type: 'GET_USER_ID',
+    payload: axios.get(`http://192.168.100.69:3020/rentapp/users/${id}`),
+  };
+};
 
 export const login = data => {
   return {
     type: 'LOGIN',
     payload: axios({
       method: 'post',
-      url: `http://192.168.100.81:3020/rentapp/users/signin`,
+      url: 'http://192.168.100.69:3020/rentapp/users/signin',
       data: data,
     })
       .then()
@@ -20,7 +26,7 @@ export const register = data => {
     type: 'REGISTER',
     payload: axios({
       method: 'post',
-      url: `http://192.168.100.81:3020/rentapp/users/signup`,
+      url: 'http://192.168.100.69:3020/rentapp/users/signup',
       data: data,
     })
       .then()

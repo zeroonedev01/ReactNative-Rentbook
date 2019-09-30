@@ -7,10 +7,6 @@ const init = {
 
 const auth = (state = init, action) => {
   switch (action.type) {
-    // case 'LOGOUT':
-    //   return {
-    //     userData: [],
-    //   };
     case 'LOGIN_PENDING':
       return {
         ...state,
@@ -51,6 +47,26 @@ const auth = (state = init, action) => {
         ...state,
         isLoading: false,
         isFulfilled: true,
+      };
+    case 'GET_USER_ID_PENDING':
+      return {
+        ...state,
+        isLoading: true,
+        isFulfilled: false,
+        isRejected: false,
+      };
+    case 'GET_USER_ID_REJECTED':
+      return {
+        ...state,
+        isLoading: false,
+        isRejected: true,
+      };
+    case 'GET_USER_ID_FULFILLED':
+      return {
+        ...state,
+        isLoading: false,
+        isFulfilled: true,
+        userData: action.payload.data.values,
       };
     default:
       return state;
